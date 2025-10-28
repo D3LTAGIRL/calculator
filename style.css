@@ -9,6 +9,11 @@ body {
   align-items: stretch;
 }
 
+#calc-display {
+  font-size: 36px;
+  text-align: right;
+}
+
 #calculator-buttons {
   display: flex;
   flex-direction: column-reverse;
