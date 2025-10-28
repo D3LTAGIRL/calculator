@@ -20,6 +20,13 @@ body {
   display: flex;
 }
 
+#misc-buttons {
+  flex: 3 3;
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+}
+
 #operator-buttons {
   display: flex;
   flex-direction: column-reverse;
@@ -35,5 +42,13 @@ body {
   margin: 0px;
   border-radius: 0px;
   border: 1px solid gray;
+}
+
+#misc-buttons button {
+  flex: 1 1 33%;
+}
+
+#misc-buttons .two-wide {
+  flex: 2 2 66%;
 }
 
