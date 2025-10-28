@@ -6,13 +6,19 @@ body {
   display: flex;
   flex-direction: column;
   margin: 8px;
+  align-items: stretch;
+}
+
+#calculator-buttons {
+  display: flex;
+  flex-direction: column-reverse;
 }
 
 #calculator button {
+  flex: auto;
   font-family: inherit;
   margin: 0px;
   padding: 0px;
-  width: 20px;
   border-radius: 0px;
   border: 1px solid gray;
 }
