@@ -22,7 +22,7 @@ body {
 
 #misc-buttons {
   flex: 3 3;
-  flex-direction: row;
+  flex-direction: row-reverse;
   display: flex;
   flex-wrap: wrap;
 }
