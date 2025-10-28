@@ -16,14 +16,20 @@ body {
 
 #calculator-buttons {
   display: flex;
+}
+
+#operator-buttons {
+  display: flex;
   flex-direction: column-reverse;
+  flex: 1 1;
 }
 
 #calculator button {
+  font: 2em sans-serif;
   flex: auto;
   font-family: inherit;
   margin: 0px;
-  padding: 0px;
+  padding-bottom: 0.2em;
   border-radius: 0px;
   border: 1px solid gray;
 }
