@@ -30,6 +30,10 @@ function operate(num1, operator, num2) {
   }
 }
 
+const calcDisplay = document.querySelector("#calc-display");
+
+calcDisplay.setAttribute("value", "0")
+
 let prevNum;
 let currNum;
 let operator;
