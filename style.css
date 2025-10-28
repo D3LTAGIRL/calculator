@@ -27,11 +27,12 @@ body {
 }
 
 #calculator button {
-  font: 2em sans-serif;
-  flex: auto;
+  padding: 0px;
+  padding-bottom: 8px;
+  font-size: 36px;
+  flex: 1 1;
   font-family: inherit;
   margin: 0px;
-  padding-bottom: 0.2em;
   border-radius: 0px;
   border: 1px solid gray;
 }
