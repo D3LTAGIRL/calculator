@@ -3,6 +3,7 @@ body {
 }
 
 #calculator {
+  border: 1px solid gray;
   display: flex;
   flex-direction: column;
   margin: 8px;
@@ -10,7 +11,8 @@ body {
 }
 
 #calc-display {
-  font-size: 36px;
+  border: 1px solid gray;
+  font-size: 48px;
   text-align: right;
 }
 
