@@ -38,7 +38,6 @@ function handleButtonInput(event) {
   switch (event.target.innerText) {
     case "Clear":
       prevNum = currNum = operator = null;
-      updateCalcDisplay();
       break;
 
     case "0":
@@ -51,23 +50,28 @@ function handleButtonInput(event) {
     case "7":
     case "8":
     case "9":
-      currNum = parseFloat(String(currNum ? currNum : 0) + event.target.innerText);
-      updateCalcDisplay();
+      currNum = String(currNum ? currNum : "") + event.target.innerText;
       break;
-    
+
+    case "⌫":
+      currNum = currNum.substring(0, currNum.length-1);
+      console.log(currNum);
+      
     default:
       console.log(event);
       break;
       
   }
+  updateCalcDisplay();
 }
 
 const calcDisplay = document.querySelector("#calc-display");
 const calcButtons = document.querySelector("#calculator-buttons");
 
-let prevNum = null;
-let currNum = null;
-let operator = null;
+let prevNum = "";
+let currNum = "";
+let operator = "";
+let currNumIsFloat = false;
 
 calcButtons.addEventListener("click", handleButtonInput);
 
