@@ -43,6 +43,7 @@ body {
   margin: 0px;
   border-radius: 0px;
   border: 1px solid gray;
+  cursor: pointer;
 }
 
 #operator-buttons button {
