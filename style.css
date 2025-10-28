@@ -45,6 +45,14 @@ body {
   border: 1px solid gray;
 }
 
+#operator-buttons button {
+  background-color: lightskyblue;
+}
+
+#operator-buttons #equals {
+  background-color: lightsalmon;
+}
+
 #misc-buttons button {
   flex: 1 1 33%;
 }
