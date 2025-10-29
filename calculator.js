@@ -50,7 +50,7 @@ function handleButtonInput(event) {
     case "7":
     case "8":
     case "9":
-      currNum = String(currNum ? currNum : "") + event.target.innerText;
+      currNum = String(currNum !== "0" && currNum ? currNum : "") + event.target.innerText;
       break;
 
     case "⌫":
