@@ -17,6 +17,13 @@ body {
   padding: 0px 10px;
 }
 
+#equation-display {
+  color: gray;
+  border: 1px solid gray;
+  font-size: 24px;
+  text-align: right;
+}
+
 #calculator-buttons {
   display: flex;
 }
