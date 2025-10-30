@@ -30,14 +30,24 @@ function operate(num1, operator, num2) {
   }
 }
 
+function updateEquationDisplay() {
+  if (prevNum && operator) {
+    if (prevPrevNum) {
+      equationDisplay.setAttribute("value", prevPrevNum + " " + operator + " " + prevNum + " =")
+    } else {
+    equationDisplay.setAttribute("value", prevNum + " " + operator);
+    }
+  }
+}
+
 function updateCalcDisplay() {
-  calcDisplay.setAttribute("value", currNum ? currNum : 0);
+  calcDisplay.setAttribute("value", currNum ? currNum : "");
 }
 
 function handleButtonInput(event) {
   switch (event.target.innerText) {
     case "Clear":
-      prevNum = currNum = operator = null;
+      prevNum = prevPrevNum = currNum = operator = "";
       break;
 
     case "0":
@@ -53,6 +63,12 @@ function handleButtonInput(event) {
       currNum = String(currNum !== "0" && currNum ? currNum : "") + event.target.innerText;
       break;
 
+    case ".":
+      if (currNum.indexOf(".") === -1) {
+        currNum += ".";
+      }
+      break;
+
     case "⌫":
       currNum = currNum.substring(0, currNum.length-1);
       console.log(currNum);
@@ -65,9 +81,11 @@ function handleButtonInput(event) {
   updateCalcDisplay();
 }
 
+const equationDisplay = document.querySelector("equation-display");
 const calcDisplay = document.querySelector("#calc-display");
 const calcButtons = document.querySelector("#calculator-buttons");
 
+let prevPrevNum = "";
 let prevNum = "";
 let currNum = "";
 let operator = "";
