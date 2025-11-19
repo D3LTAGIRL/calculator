@@ -50,6 +50,7 @@ function handleButtonInput(event) {
     case "Clear":
       prevNum = operator = "";
       currNum = "0";
+      displayingResult = false;
       updateCalcDisplay();
       break;
 
@@ -72,7 +73,7 @@ function handleButtonInput(event) {
           displayingResult = false;
         }
       }
-      if (operator) {
+      if (operator && prevNum === "") {
         prevNum = currNum;
         currNum = "";
       }
@@ -143,7 +144,6 @@ const calcButtons = document.querySelector("#calculator-buttons");
 let prevNum = "";
 let currNum = "0";
 let operator = "";
-let currNumIsFloat = false;
 let displayingResult = false;
 
 calcButtons.addEventListener("click", handleButtonInput);
