@@ -7,7 +7,9 @@ function subtract(num1, num2) {
 }
 
 function divide(num1, num2) {
-  return num1/num2;
+  if (num2 !== 0)
+    return num1/num2;
+  return "NaN";
 }
 
 function multiply(num1, num2) {
@@ -15,6 +17,14 @@ function multiply(num1, num2) {
 }
 
 function operate(num1, operator, num2) {
+  num1 = parseFloat(num1);
+  num2 = parseFloat(num2);
+  if (typeof num1 === "undefined" || typeof num2 === "undefined") {
+    return "ERROR"
+  }
+  if (isNaN(num1) || isNaN(num2)) {
+    return "NaN";
+  }
   switch (operator) {
     case "+":
       return add(num1, num2)
@@ -22,32 +32,25 @@ function operate(num1, operator, num2) {
     case "-":
       return subtract(num1, num2);
 
-    case "*":
+    case "×":
       return multiply(num1, num2);
 
-    case "/":
+    case "÷":
       return divide(num1, num2);
   }
 }
 
-function updateEquationDisplay() {
-  if (prevNum && operator) {
-    if (prevPrevNum) {
-      equationDisplay.setAttribute("value", prevPrevNum + " " + operator + " " + prevNum + " =")
-    } else {
-    equationDisplay.setAttribute("value", prevNum + " " + operator);
-    }
-  }
-}
-
 function updateCalcDisplay() {
-  calcDisplay.setAttribute("value", currNum ? currNum : "");
+  calcDisplay.setAttribute("value", currNum || currNum === "0" ? currNum : "");
 }
 
 function handleButtonInput(event) {
+  equationDisplay.setAttribute("value", "");
   switch (event.target.innerText) {
     case "Clear":
-      prevNum = prevPrevNum = currNum = operator = "";
+      prevNum = operator = "";
+      currNum = "0";
+      updateCalcDisplay();
       break;
 
     case "0":
@@ -60,7 +63,55 @@ function handleButtonInput(event) {
     case "7":
     case "8":
     case "9":
+      if (displayingResult) {
+        if (operator && !prevNum) {
+          displayingResult = false;
+        } else {
+          prevNum = operator = "";
+          currNum = "0";
+          displayingResult = false;
+        }
+      }
+      if (operator) {
+        prevNum = currNum;
+        currNum = "";
+      }
       currNum = String(currNum !== "0" && currNum ? currNum : "") + event.target.innerText;
+      updateCalcDisplay();
+      break;
+
+    case "÷":
+    case "×":
+    case "+":
+    case "-":
+      if (currNum) {
+        if (prevNum) {
+          if (!displayingResult) {
+            equationDisplay.setAttribute("value", prevNum + " " + operator + " " + currNum + " =");
+            currNum = operate(prevNum, operator, currNum);
+            prevNum = "";
+            displayingResult = true;
+          }
+        } else {
+          if (displayingResult) {
+            displayingResult = false;
+          }
+        }
+        operator = event.target.innerText;
+        updateCalcDisplay();
+      }
+      break;
+      
+    case "=":
+      if (!prevNum || !currNum || !operator) {
+        break;
+      }
+      equationDisplay.setAttribute("value", prevNum + " " + operator + " " + currNum + " =");
+      currNum = operate(prevNum, operator, currNum);
+      prevNum = "";
+      displayingResult = true;
+      operator = "";
+      updateCalcDisplay();
       break;
 
     case ".":
@@ -72,24 +123,28 @@ function handleButtonInput(event) {
     case "⌫":
       currNum = currNum.substring(0, currNum.length-1);
       console.log(currNum);
+      break;
       
     default:
       console.log(event);
       break;
       
   }
-  updateCalcDisplay();
+  console.log(currNum);
+  console.log(operator);
+  console.log(prevNum);
+  console.log(displayingResult);
 }
 
-const equationDisplay = document.querySelector("equation-display");
+const equationDisplay = document.querySelector("#equation-display");
 const calcDisplay = document.querySelector("#calc-display");
 const calcButtons = document.querySelector("#calculator-buttons");
 
-let prevPrevNum = "";
 let prevNum = "";
-let currNum = "";
+let currNum = "0";
 let operator = "";
 let currNumIsFloat = false;
+let displayingResult = false;
 
 calcButtons.addEventListener("click", handleButtonInput);
 
